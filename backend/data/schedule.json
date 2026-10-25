@@ -1,0 +1,420 @@
+{
+  "rooms": [
+    {
+      "room": "B101",
+      "building": "Baker Hall"
+    },
+    {
+      "room": "B204",
+      "building": "Baker Hall"
+    },
+    {
+      "room": "B210",
+      "building": "Baker Hall"
+    },
+    {
+      "room": "E105",
+      "building": "Engineering Center"
+    },
+    {
+      "room": "E220",
+      "building": "Engineering Center"
+    },
+    {
+      "room": "E310",
+      "building": "Engineering Center"
+    },
+    {
+      "room": "L110",
+      "building": "Liberal Arts"
+    },
+    {
+      "room": "L120",
+      "building": "Liberal Arts"
+    },
+    {
+      "room": "L205",
+      "building": "Liberal Arts"
+    },
+    {
+      "room": "L301",
+      "building": "Liberal Arts"
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "course_code": "CS101",
+      "course_name": "Intro to Programming",
+      "instructor": "Dr. Alan Rivera",
+      "room": "B101",
+      "building": "Baker Hall",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "09:00",
+      "end_time": "09:50"
+    },
+    {
+      "id": 2,
+      "course_code": "CS201",
+      "course_name": "Data Structures",
+      "instructor": "Dr. Priya Nair",
+      "room": "B101",
+      "building": "Baker Hall",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "11:00",
+      "end_time": "11:50"
+    },
+    {
+      "id": 3,
+      "course_code": "STAT210",
+      "course_name": "Applied Statistics",
+      "instructor": "Dr. Helen Brooks",
+      "room": "B101",
+      "building": "Baker Hall",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "13:00",
+      "end_time": "14:15"
+    },
+    {
+      "id": 4,
+      "course_code": "MATH101",
+      "course_name": "Calculus I",
+      "instructor": "Prof. Omar Haddad",
+      "room": "B204",
+      "building": "Baker Hall",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "10:00",
+      "end_time": "10:50"
+    },
+    {
+      "id": 5,
+      "course_code": "MATH201",
+      "course_name": "Linear Algebra",
+      "instructor": "Prof. Grace Liu",
+      "room": "B204",
+      "building": "Baker Hall",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "09:00",
+      "end_time": "10:15"
+    },
+    {
+      "id": 6,
+      "course_code": "MATH310",
+      "course_name": "Differential Equations",
+      "instructor": "Prof. Omar Haddad",
+      "room": "B204",
+      "building": "Baker Hall",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "14:30",
+      "end_time": "15:45"
+    },
+    {
+      "id": 7,
+      "course_code": "PHYS101",
+      "course_name": "General Physics I",
+      "instructor": "Dr. Marcus Webb",
+      "room": "B210",
+      "building": "Baker Hall",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "13:00",
+      "end_time": "13:50"
+    },
+    {
+      "id": 8,
+      "course_code": "CHEM101",
+      "course_name": "General Chemistry",
+      "instructor": "Dr. Sofia Alvarez",
+      "room": "B210",
+      "building": "Baker Hall",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "10:30",
+      "end_time": "11:45"
+    },
+    {
+      "id": 9,
+      "course_code": "CHEM201",
+      "course_name": "Organic Chemistry",
+      "instructor": "Dr. Sofia Alvarez",
+      "room": "B210",
+      "building": "Baker Hall",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "15:00",
+      "end_time": "15:50"
+    },
+    {
+      "id": 10,
+      "course_code": "ENGR100",
+      "course_name": "Intro to Engineering",
+      "instructor": "Prof. Daniel Kim",
+      "room": "E105",
+      "building": "Engineering Center",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "08:00",
+      "end_time": "08:50"
+    },
+    {
+      "id": 11,
+      "course_code": "ENGR210",
+      "course_name": "Statics",
+      "instructor": "Prof. Daniel Kim",
+      "room": "E105",
+      "building": "Engineering Center",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "08:00",
+      "end_time": "09:15"
+    },
+    {
+      "id": 12,
+      "course_code": "ENGR305",
+      "course_name": "Thermodynamics",
+      "instructor": "Dr. Rachel Okafor",
+      "room": "E105",
+      "building": "Engineering Center",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "14:00",
+      "end_time": "15:15"
+    },
+    {
+      "id": 13,
+      "course_code": "CS330",
+      "course_name": "Database Systems",
+      "instructor": "Dr. Priya Nair",
+      "room": "E220",
+      "building": "Engineering Center",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "10:30",
+      "end_time": "11:45"
+    },
+    {
+      "id": 14,
+      "course_code": "CS350",
+      "course_name": "Operating Systems",
+      "instructor": "Dr. Tomas Novak",
+      "room": "E220",
+      "building": "Engineering Center",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "10:00",
+      "end_time": "10:50"
+    },
+    {
+      "id": 15,
+      "course_code": "CS420",
+      "course_name": "Machine Learning",
+      "instructor": "Dr. Alan Rivera",
+      "room": "E220",
+      "building": "Engineering Center",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "15:00",
+      "end_time": "16:15"
+    },
+    {
+      "id": 16,
+      "course_code": "EE200",
+      "course_name": "Circuit Analysis",
+      "instructor": "Dr. Wei Zhang",
+      "room": "E310",
+      "building": "Engineering Center",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "09:00",
+      "end_time": "10:15"
+    },
+    {
+      "id": 17,
+      "course_code": "EE310",
+      "course_name": "Signals and Systems",
+      "instructor": "Dr. Wei Zhang",
+      "room": "E310",
+      "building": "Engineering Center",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "13:00",
+      "end_time": "14:15"
+    },
+    {
+      "id": 18,
+      "course_code": "ENG101",
+      "course_name": "College Writing",
+      "instructor": "Prof. Emily Carter",
+      "room": "L110",
+      "building": "Liberal Arts",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "09:00",
+      "end_time": "09:50"
+    },
+    {
+      "id": 19,
+      "course_code": "ENG210",
+      "course_name": "American Literature",
+      "instructor": "Prof. Emily Carter",
+      "room": "L110",
+      "building": "Liberal Arts",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "11:00",
+      "end_time": "12:15"
+    },
+    {
+      "id": 20,
+      "course_code": "HIST101",
+      "course_name": "World History",
+      "instructor": "Dr. James Whitfield",
+      "room": "L205",
+      "building": "Liberal Arts",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "11:00",
+      "end_time": "11:50"
+    },
+    {
+      "id": 21,
+      "course_code": "HIST250",
+      "course_name": "Modern Europe",
+      "instructor": "Dr. James Whitfield",
+      "room": "L205",
+      "building": "Liberal Arts",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "14:00",
+      "end_time": "15:15"
+    },
+    {
+      "id": 22,
+      "course_code": "PSY101",
+      "course_name": "Intro to Psychology",
+      "instructor": "Dr. Nadia Petrova",
+      "room": "L301",
+      "building": "Liberal Arts",
+      "days": [
+        "Mon",
+        "Wed",
+        "Fri"
+      ],
+      "start_time": "10:00",
+      "end_time": "10:50"
+    },
+    {
+      "id": 23,
+      "course_code": "PSY220",
+      "course_name": "Cognitive Psychology",
+      "instructor": "Dr. Nadia Petrova",
+      "room": "L301",
+      "building": "Liberal Arts",
+      "days": [
+        "Tue",
+        "Thu"
+      ],
+      "start_time": "09:30",
+      "end_time": "10:45"
+    },
+    {
+      "id": 24,
+      "course_code": "PHIL110",
+      "course_name": "Ethics",
+      "instructor": "Prof. Samuel Adeyemi",
+      "room": "L301",
+      "building": "Liberal Arts",
+      "days": [
+        "Wed"
+      ],
+      "start_time": "16:00",
+      "end_time": "18:45"
+    },
+    {
+      "id": 25,
+      "course_code": "ART101",
+      "course_name": "Drawing Fundamentals",
+      "instructor": "Prof. Lucia Romano",
+      "room": "L120",
+      "building": "Liberal Arts",
+      "days": [
+        "Mon",
+        "Wed"
+      ],
+      "start_time": "13:00",
+      "end_time": "14:15"
+    },
+    {
+      "id": 26,
+      "course_code": "ART210",
+      "course_name": "Art History Studio",
+      "instructor": "Prof. Lucia Romano",
+      "room": "L120",
+      "building": "Liberal Arts",
+      "days": [
+        "Fri"
+      ],
+      "start_time": "10:00",
+      "end_time": "12:45"
+    }
+  ]
+}
