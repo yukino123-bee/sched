@@ -1,5 +1,7 @@
 // Thin wrapper around fetch. All times in the API are 24h "HH:MM".
-const BASE = "/api";
+// In production VITE_API_URL points at the Render backend; in dev it is empty and the Vite proxy handles /api.
+// Tolerates a trailing slash or a trailing "/api" in the variable.
+const BASE = `${(import.meta.env.VITE_API_URL || "").replace(/\/+$/, "").replace(/\/api$/, "")}/api`;
 
 // Turn FastAPI error bodies (string or validation-error list) into one readable message.
 function errorMessage(body, status) {
@@ -18,11 +20,15 @@ async function request(path, options) {
   try {
     res = await fetch(BASE + path, options);
   } catch {
-    throw new Error("Cannot reach the server. Is the backend running on port 8000?");
+    throw new Error("Cannot reach the server. Is the backend running?");
   }
   if (res.status === 204) return null;
   const body = await res.json().catch(() => null);
-  if (!res.ok) throw new Error(errorMessage(body, res.status));
+  if (!res.ok) {
+    const msg = errorMessage(body, res.status);
+    // Unexpected 404/5xx: include the URL so a misconfigured API address is easy to spot
+    throw new Error(res.status === 404 && msg === "Not Found" ? `Not Found: ${res.url}` : msg);
+  }
   return body;
 }
 

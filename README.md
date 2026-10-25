@@ -15,7 +15,7 @@ React (Vite) frontend + FastAPI backend. No database: data lives in
 cd backend
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip install -r requirements.txt            # add: -r requirements-dev.txt to run tests
 uvicorn main:app --reload --port 8000
 ```
 
@@ -39,6 +39,7 @@ Open http://localhost:5173. Vite proxies `/api` to `http://localhost:8000`
 ```bash
 cd backend
 source .venv/bin/activate
+pip install -r requirements-dev.txt
 pytest
 ```
 
@@ -68,6 +69,41 @@ curl -X POST localhost:8000/api/classes -H 'Content-Type: application/json' -d '
 }'
 ```
 
+## Deploy: backend on Render, frontend on Vercel
+
+Push this repo to GitHub first. Deploy the backend first, because the frontend needs its URL.
+
+### 1. Backend → Render
+1. In Render: **New + → Blueprint**, pick the repo. It reads `render.yaml`
+   (root dir `backend`, build `pip install -r requirements.txt`,
+   start `uvicorn main:app --host 0.0.0.0 --port $PORT`, health check `/api/health`).
+   Or create a **Web Service** manually with those same settings.
+2. Note the service URL, e.g. `https://class-schedule-api.onrender.com`.
+3. After step 2 below, set the env var **`ALLOWED_ORIGINS`** to your Vercel URL
+   (e.g. `https://my-app.vercel.app`, comma-separate several) and redeploy.
+   Optional: `ALLOWED_ORIGIN_REGEX=https://.*\.vercel\.app` also allows preview deployments.
+
+### 2. Frontend → Vercel
+1. In Vercel: **Add New → Project**, import the repo, set **Root Directory** to `frontend`
+   (Vite is auto-detected; see `frontend/vercel.json`).
+2. Add the environment variable **`VITE_API_URL`** = your Render URL (no trailing slash).
+3. Deploy. Changing `VITE_API_URL` later requires a redeploy, since Vite bakes it in at build time.
+
+### Data persistence on Render
+The free tier has an **ephemeral filesystem**: classes added or deleted in production are lost
+when the service restarts, redeploys, or spins down after idle (it restarts from the seed data).
+The first request after idle can also take ~30–60 s. To keep changes, use a paid plan, attach a
+persistent disk (e.g. mounted at `/var/data`) and set `DATA_FILE=/var/data/schedule.json`;
+the file is created from the seed data on first start.
+
+### Environment variables
+| Where | Name | Purpose |
+| --- | --- | --- |
+| Render | `ALLOWED_ORIGINS` | Comma-separated frontend origins allowed by CORS |
+| Render | `ALLOWED_ORIGIN_REGEX` | Optional regex for extra origins (previews) |
+| Render | `DATA_FILE` | Optional path for the live JSON file (persistent disk) |
+| Vercel | `VITE_API_URL` | Backend base URL, e.g. `https://class-schedule-api.onrender.com` |
+
 ## Notes
 
 - Rooms are stored in `schedule.json` alongside classes, so a room stays listed even if its
@@ -83,9 +119,12 @@ curl -X POST localhost:8000/api/classes -H 'Content-Type: application/json' -d '
 backend/
   main.py            FastAPI app, endpoints, scheduling logic
   models.py          Pydantic models + validation
+  requirements.txt   runtime deps (requirements-dev.txt adds pytest/httpx)
   data/schedule.json seed data (10 rooms, 3 buildings, 26 classes)
   tests/             pytest tests
+render.yaml          Render blueprint (backend)
 frontend/
+  vercel.json        Vercel config; .env.example documents VITE_API_URL
   src/api.js         fetch helper
   src/App.jsx        tabs + Add Class modal
   src/components/    FindClass, FreeRooms, RoomSchedule, AddClassForm, Status

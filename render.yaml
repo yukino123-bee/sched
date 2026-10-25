@@ -1,0 +1,16 @@
+# Render Blueprint: New + > Blueprint, point it at this repo.
+services:
+  - type: web
+    name: class-schedule-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      # Set to your Vercel URL after the frontend is deployed, e.g. https://my-app.vercel.app
+      - key: ALLOWED_ORIGINS
+        sync: false

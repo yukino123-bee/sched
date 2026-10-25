@@ -5,6 +5,7 @@ written back after every change.
 """
 import json
 import os
+import shutil
 import threading
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -15,7 +16,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from models import DAYS, TIME_RE, ClassIn, ClassOut, Day, FreeRoom, Room
 
-DATA_FILE = Path(__file__).parent / "data" / "schedule.json"
+SEED_FILE = Path(__file__).parent / "data" / "schedule.json"
+# Set DATA_FILE to keep the live data elsewhere (e.g. a mounted disk on Render).
+# If that file doesn't exist yet, it's created from the bundled seed data.
+DATA_FILE = Path(os.environ.get("DATA_FILE", SEED_FILE))
 
 # In-memory state: {"rooms": [{room, building}], "classes": [{id, ...}]}
 store: dict = {"rooms": [], "classes": []}
@@ -25,6 +29,9 @@ lock = threading.Lock()
 # ---------- persistence ----------
 
 def load_data() -> None:
+    if not DATA_FILE.exists():
+        DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(SEED_FILE, DATA_FILE)
     with open(DATA_FILE, encoding="utf-8") as f:
         raw = json.load(f)
     store["rooms"] = raw["rooms"]
@@ -100,12 +107,28 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(title="Class Schedule & Room Finder", lifespan=lifespan)
+# Allowed browser origins: comma-separated ALLOWED_ORIGINS env var (your Vercel URL in production).
+# Optional ALLOWED_ORIGIN_REGEX also lets you allow e.g. Vercel preview deployments.
+origins = [o.strip().rstrip("/") for o in os.environ.get(
+    "ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=origins,
+    allow_origin_regex=os.environ.get("ALLOWED_ORIGIN_REGEX") or None,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return {"service": "Class Schedule & Room Finder API", "docs": "/docs", "health": "/api/health"}
+
+
+@app.get("/api/health")
+def health():
+    """Used by Render's health check."""
+    return {"status": "ok"}
 
 
 @app.get("/api/classes", response_model=list[ClassOut])
